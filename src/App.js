@@ -28,12 +28,22 @@ class BooksApp extends React.Component {
     this.setState({showSearchPage : pageView})
   }
 
-  // updateBookShelf(Book) {
-  //   book.shelf = (event.target)
-  // }
 
   componentDidMount() {
     BooksAPI.getAll().then(resp => this.setState({books: resp}))
+  }
+
+  changeBookShelf = (book, shelf) => {
+      this.setState({
+           books : this.state.books.map(b => {
+            if(b.id === book.id) {
+              b.shelf = shelf
+              return b
+            } else {
+              return b
+            }
+      })
+    })
   }
 
   render() {
@@ -48,7 +58,7 @@ class BooksApp extends React.Component {
               <h1>MyReads</h1>
             </div>
 
-            <BookShelves allBooks={this.state.books}>
+            <BookShelves allBooks={this.state.books} changeShelf={this.changeBookShelf}>
             </BookShelves>
 
             <div className="open-search">
