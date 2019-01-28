@@ -14,9 +14,9 @@ class BookShelves extends React.Component {
 		return (
 
 				<div>
-					<Shelf books={currentlyReading} title={"Currently Reading"} changeShelf={this.props.changeShelf}/>
-					<Shelf books={wantToRead} title={"Want to Read"} changeShelf={this.props.changeShelf}/>
-					<Shelf books={read} title={"Read"} changeShelf={this.props.changeShelf}/>
+					<Shelf books={currentlyReading} title={"Currently Reading"} changeShelf={this.props.changeShelf} updateBook = {this.props.updateBookState}/>
+					<Shelf books={wantToRead} title={"Want to Read"} changeShelf={this.props.changeShelf} updateBook = {this.props.updateBookState}/>
+					<Shelf books={read} title={"Read"} changeShelf={this.props.changeShelf} updateBook = {this.props.updateBookState}/>
 				</div>
 
 		)

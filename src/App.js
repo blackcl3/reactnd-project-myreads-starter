@@ -28,10 +28,26 @@ class BooksApp extends React.Component {
     this.setState({showSearchPage : pageView})
   }
 
+  //this function syntax borrowed from https://github.com/JohPik/reactnd-project-myreads-starter/blob/master/src/App.js
+  getAllBooks () {
+    BooksAPI.getAll()
+    .then((books) => this.setState({books: books}))
+
+  }
+
+
 
   componentDidMount() {
-    BooksAPI.getAll().then(resp => this.setState({books: resp}))
+    this.getAllBooks()
+
+
   }
+
+  updateBookState = (book, shelf) => {
+    BooksAPI.update(book, shelf)
+    .then(() => this.getAllBooks()
+      )
+}
 
   changeBookShelf = (book, shelf) => {
       this.setState({
@@ -46,6 +62,8 @@ class BooksApp extends React.Component {
     })
   }
 
+
+
   render() {
     return (
       <div className="app">
@@ -58,7 +76,7 @@ class BooksApp extends React.Component {
               <h1>MyReads</h1>
             </div>
 
-            <BookShelves allBooks={this.state.books} changeShelf={this.changeBookShelf}>
+            <BookShelves allBooks={this.state.books} changeShelf={this.changeBookShelf} updateBook={this.updateBookState}>
             </BookShelves>
 
             <div className="open-search">
