@@ -18,7 +18,8 @@ class BooksApp extends React.Component {
      */
 
     showSearchPage: false,
-    books: []
+    books: [],
+    query: ''
   }
 
 
@@ -43,19 +44,16 @@ class BooksApp extends React.Component {
 
   }
 
-  updateBookState = (book, shelf) => {
-    BooksAPI.update(book, shelf)
-    .then(() => this.getAllBooks()
-      )
-}
 
   changeBookShelf = (book, shelf) => {
       this.setState({
            books : this.state.books.map(b => {
             if(b.id === book.id) {
               b.shelf = shelf
+              BooksAPI.update(book, shelf)
               return b
             } else {
+              BooksAPI.update(book, shelf)
               return b
             }
       })
